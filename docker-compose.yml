@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+    db:
+        image: postgres
+        container_name: db
+        restart: always
+        networks: 
+            - proxynet
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_HOST_AUTH_METHOD=trust
+        volumes:
+            - pg-data:/var/lib/postgres/data
+        ports:
+            - 5432:5432
+networks:
+    proxynet:
+        name: apps-net
+volumes:
+    pg-data:
